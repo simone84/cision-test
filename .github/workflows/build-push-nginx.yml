@@ -24,9 +24,9 @@ jobs:
 
         run: |
           docker build . -t nginx:${{ inputs.tag }}
-          echo $token |docker login -u$user $registry --password-stdin
-          # docker tag nginx:${{ inputs.tag }} ${{ secrets.registry }}/$repo/nginx:${{ inputs.tag }}
-          # docker push ${{ secrets.registry }}/$repo/nginx:${{ inputs.tag }}
+          echo ${token} |docker login -u${user} ${registry} --password-stdin
+          docker tag nginx:${{ inputs.tag }} $registry/$repo/nginx:${{ inputs.tag }}
+          docker push ${registry}/${repo}/nginx:${{ inputs.tag }}
 
 
       
