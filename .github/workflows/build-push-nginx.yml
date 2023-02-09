@@ -2,6 +2,11 @@ name: Nginx-deploy
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag the image"
+        default: 1.19.1
+        required: true
 
 jobs:
   build:
@@ -10,6 +15,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Hello from Docker
-        run: docker build . -t nginx:1.19.1
+      - name: Docker build and Push
+        env:
+          token: ${{ secrets.jfrogtoken }}
+          user: ${{ secrets.jfroguser }}
+          registry: ${{ secrets.registry }}
+          repo: "docker"
+
+        run: |
+          docker build . -t nginx:${{ inputs.tag }}
+          echo $token |docker login -u${{ secrets.user }} ${{ secrets.registry }} --password-stdin
+          docker tag nginx:${{ inputs.tag }} ${{ secrets.registry }}/$repo/nginx:${{ inputs.tag }}
+          docker push ${{ secrets.registry }}/$repo/nginx:${{ inputs.tag }}
+
+
       
