@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-web
+  namespace: nginx
+  labels:
+    app: nginx-web
+spec:
+  replicas: 1
+  podManagementPolicy: Parallel
+  serviceName: nginx-web
+  selector:
+    matchLabels:
+      app: nginx-web
+  template:
+    metadata:
+      labels:
+        app: nginx-web
+    spec:
+      volumes:
+      - name: nginx-web
+        persistentVolumeClaim:
+          claimName: nginx-web
+      # - name: vault-transit 
+        # configMap:
+        #   name: vault-transit
+        #   items:
+        #     - key: vault-transit.hcl
+        #       path: vault-transit.hcl
+      # securityContext:
+      #   fsGroup: 101
+      #   runAsGroup: 101
+      #   runAsNonRoot: true
+      #   runAsUser: 101      
+      imagePullSecrets:
+      - name: regcredjf  
+      containers:
+      - name: nginx-web
+        image: simone1984.jfrog.io/docker/nginx-web:1.19.1
+        env:
+          - name: HOST_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          - name: NGINX_WEB
+            value: "http://127.0.0.1:80"
+        volumeMounts:
+        - name: nginx-web
+          mountPath: /var/log/nginx
+        # - name: nginx-web
+        #   mountPath: /usr/share/nginx/html/hello.html
+        #   subPath: hello.html
+        ports:
+          - containerPort: 80
+            name: nginx-web
