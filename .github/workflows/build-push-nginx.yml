@@ -15,18 +15,26 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Docker build and Push
-        env:
-          token: ${{ secrets.jfrogtoken }}
-          user: ${{ secrets.jfroguser }}
-          registry: ${{ secrets.registry }}
-          repo: "docker"
+      # - name: Docker build and Push
+      #   env:
+      #     token: ${{ secrets.jfrogtoken }}
+      #     user: ${{ secrets.jfroguser }}
+      #     registry: ${{ secrets.registry }}
+      #     repo: "docker"
 
-        run: |
-          docker build . -t nginx:${{ inputs.tag }}
-          echo ${token} |docker login -u${user} ${registry} --password-stdin
-          docker tag nginx:${{ inputs.tag }} $registry/$repo/nginx:${{ inputs.tag }}
-          docker push ${registry}/${repo}/nginx:${{ inputs.tag }}
+      #   run: |
+      #     docker build . -t nginx:${{ inputs.tag }}
+      #     echo ${token} |docker login -u${user} ${registry} --password-stdin
+      #     docker tag nginx:${{ inputs.tag }} $registry/$repo/nginx:${{ inputs.tag }}
+      #     docker push ${registry}/${repo}/nginx:${{ inputs.tag }}
+
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+
+      - uses: actions-hub/kubectl@master
+        with:
+          args: get pods -n nginx
 
 
       
