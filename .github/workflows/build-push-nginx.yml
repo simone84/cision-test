@@ -24,9 +24,9 @@ jobs:
 
         run: |
           docker build . -t nginx:${{ inputs.tag }}
-          echo $token |docker login -u${{ secrets.user }} ${{ secrets.registry }} --password-stdin
-          docker tag nginx:${{ inputs.tag }} ${{ secrets.registry }}/$repo/nginx:${{ inputs.tag }}
-          docker push ${{ secrets.registry }}/$repo/nginx:${{ inputs.tag }}
+          echo $token |docker login -ugithub simone1984.jfrog.io --password-stdin
+          # docker tag nginx:${{ inputs.tag }} ${{ secrets.registry }}/$repo/nginx:${{ inputs.tag }}
+          # docker push ${{ secrets.registry }}/$repo/nginx:${{ inputs.tag }}
 
 
       
