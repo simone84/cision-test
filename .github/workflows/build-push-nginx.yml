@@ -34,6 +34,10 @@ jobs:
 
       - uses: actions-hub/kubectl@master
         with:
+          args: apply -f statefulset.yaml -n nginx
+
+      - uses: actions-hub/kubectl@master
+        with:
           args: get pods -n nginx --insecure-skip-tls-verify
 
 
