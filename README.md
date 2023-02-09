@@ -95,7 +95,8 @@ ip and the cert managent.
 The Action doesn't expose secrets. They all been saved in the action secrets included the kubeconfig base64.
 Of course having the self host runner nothing roam free over Internet.
 I didn't get the chance to add the security context for missing time. That needed on the dockerfile the
-change of configuration files and file ownership.  
+change of configuration files and file ownership.
+I felt free to add readiness and liveness probe.  
 ```
 
 ### Terrafrom Module ###
