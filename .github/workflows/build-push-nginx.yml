@@ -27,21 +27,24 @@ jobs:
           docker tag nginx:${{ inputs.tag }} $registry/$repo/nginx:${{ inputs.tag }}
           docker push ${registry}/${repo}/nginx:${{ inputs.tag }}
 
-      - uses: actions-hub/kubectl@master
+      - name: Setup kubectl
+        uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
 
-      - uses: actions-hub/kubectl@master
+      - name: Deploy - Update
+        uses: actions-hub/kubectl@master
         with:
           args: apply -f statefulset.yaml -n nginx
 
-      - name: Docker build and Push
+      - name: Versioning Test
         env:
           version: ${{ inputs.tag }}
         run: |
           grep $version statefulset.yaml | awk '{print $2}'
           sleep 3
 
-      - uses: actions-hub/kubectl@master
+      - name: Check pod status
+        uses: actions-hub/kubectl@master
         with:
           args: get pods -n nginx
