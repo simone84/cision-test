@@ -106,3 +106,4 @@ DRY. If you want to spin up a new unvironment you will need only a new tfvars fi
 Having a local vault raft cluster I decided to integrate it with the module. This will mark policy and the 
 assume role as sensitive over the building.
 ```
+![alt text](https://github.com/simone84/cision-test/blob/main/screenshots/vault_integration.png?raw=true)
