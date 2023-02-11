@@ -63,15 +63,15 @@ module: ./modules/role
 ## Requirements ##
 Nginx exercise:
 
-1- Minikube / K3S / EKS / ETC
-2- Docker libraries
-3- Docker Artifactory / Jfrog / ETC
+- Minikube / K3S / EKS / ETC
+- Docker libraries
+- Docker Artifactory / Jfrog / ETC
 
 IAM Role exercise:
 
-1- Terraform
-2- AWS
-3- awscli
+- Terraform
+- AWS
+- awscli
 
 ## How I did it and why ##
 
@@ -103,4 +103,6 @@ I felt free to add readiness and liveness probe.
 ```
 TBH not to much to say... few resources using the name prefix. In this way you can reuse the same code and
 DRY. If you want to spin up a new unvironment you will need only a new tfvars file
+Having a local vault raft cluster I decided to integrate it with the module. This will mark policy and the 
+assume role as sensitive over the building.
 ```

@@ -11,7 +11,7 @@ resource "aws_iam_role" "role" {
   "Statement": [
     {
       "Action": "sts:AssumeRole",
-      "Principal": { "AWS": "arn:aws:iam::${var.account_id}:root" },
+      "Principal": { "AWS": "arn:aws:iam::${data.vault_kv_secret_v2.account-id.data.account-id}:root" },
       "Effect": "Allow"
     }
   ]
@@ -34,7 +34,7 @@ resource "aws_iam_policy" "policy" {
     {
       "Action": "sts:AssumeRole",
       "Effect": "Allow",
-      "Resource": "arn:aws:iam::${var.account_id}:role/${var.env_ci}-role"
+      "Resource": "arn:aws:iam::${data.vault_kv_secret_v2.account-id.data.account-id}:role/${var.env_ci}-role"
     }
   ]
 }
@@ -57,4 +57,10 @@ resource "aws_iam_group_membership" "group-member" {
   ]
 
   group = aws_iam_group.group.name
+}
+
+data "vault_kv_secret_v2" "account-id" {
+  mount = "secrets"
+  // Adding the object name as parameter allows the account parameterisation
+  name  = var.vault_env
 }
