@@ -34,7 +34,7 @@ resource "aws_iam_policy" "policy" {
     {
       "Action": "sts:AssumeRole",
       "Effect": "Allow",
-      "Resource": "arn:aws:iam::account-id:role/prod-ci-role"
+      "Resource": "arn:aws:iam::${var.account_id}:role/prod-ci-role"
     }
   ]
 }
