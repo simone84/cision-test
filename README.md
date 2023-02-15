@@ -77,7 +77,6 @@ IAM Role exercise:
 
 ### Nginx: ###
 ```
-Would be easier to discuss about my choices but I will try to wrap it up breafly
 I used an existent minikube k8s cluster, EKS for one instance seems wasted!
 This is a challenging solution because can't be reach from internet being localhost on my machine
 but we do like challenges ;-)
