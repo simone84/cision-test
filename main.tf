@@ -7,18 +7,23 @@ terraform {
   }
 }
 
-# Configure the AWS Provider
+// Configure the AWS Provider
 provider "aws" {
   region = var.aws_region
+}
+
+// Configure Vault Provider
+// Remember to export Address and Token 
+provider "vault" {
 }
 
 module "role" {
   source = "./modules/role"
 
   env_ci = var.env_ci
-  account_id = var.account_id
+  vault_env = var.vault_env
 }
 
 variable "env_ci" {}
-variable "account_id" {}
 variable "aws_region" {}
+variable "vault_env" {}

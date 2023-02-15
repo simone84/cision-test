@@ -2,6 +2,6 @@ variable "env_ci" {
   type = string
 }
 
-variable "account_id" {
+variable "vault_env" {
   type = string
 }

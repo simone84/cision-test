@@ -63,15 +63,15 @@ module: ./modules/role
 ## Requirements ##
 Nginx exercise:
 
-1- Minikube / K3S / EKS / ETC
-2- Docker libraries
-3- Docker Artifactory / Jfrog / ETC
+- Minikube / K3S / EKS / ETC
+- Docker libraries
+- Docker Artifactory / Jfrog / ETC
 
 IAM Role exercise:
 
-1- Terraform
-2- AWS
-3- awscli
+- Terraform
+- AWS
+- awscli
 
 ## How I did it and why ##
 
@@ -95,11 +95,13 @@ The Action doesn't expose secrets. They all been saved in the action secrets inc
 Of course having the self host runner nothing roam free over Internet.
 I didn't get the chance to add the security context for missing time. That needed on the dockerfile the
 change of configuration files and file ownership.
-I felt free to add readiness and liveness probe.  
 ```
 
 ### Terrafrom Module ###
 ```
 TBH not to much to say... few resources using the name prefix. In this way you can reuse the same code and
 DRY. If you want to spin up a new unvironment you will need only a new tfvars file
+Having a local vault raft cluster I decided to integrate it with the module. This will mark policy and the 
+assume role as sensitive over the building.
 ```
+![alt text](https://github.com/simone84/use-case-nginx-iam/blob/main/screenshots/vault_integration.png?raw=true)
