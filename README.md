@@ -1,4 +1,4 @@
-# cision-test
+# use-case nginx on k8s & iam role
 tech assignment 
 
 ```
@@ -95,7 +95,6 @@ The Action doesn't expose secrets. They all been saved in the action secrets inc
 Of course having the self host runner nothing roam free over Internet.
 I didn't get the chance to add the security context for missing time. That needed on the dockerfile the
 change of configuration files and file ownership.
-I felt free to add readiness and liveness probe.  
 ```
 
 ### Terrafrom Module ###
