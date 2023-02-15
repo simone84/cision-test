@@ -1,4 +1,4 @@
-# cision-test
+# use-case nginx on k8s & iam role
 tech assignment 
 
 ```
@@ -11,14 +11,14 @@ image security test. [20 pts]
 
 The image is automatically scanned by X-Ray (Jfrog) after each building
 ```
-![alt text](https://github.com/simone84/cision-test/blob/main/screenshots/xray.png?raw=true)
+![alt text](https://github.com/simone84/use-case-nginx-iam/blob/main/screenshots/xray.png?raw=true)
 
 ```
 2.  Write a Kubernetes StatefulSet to run the above, using persistent volume claims and
 resource limits. [15 pts]
 few additional objects have been added to make a complete and fuctional "deployment"
 ```
-![alt text](https://github.com/simone84/cision-test/blob/main/screenshots/limits.png?raw=true)
+![alt text](https://github.com/simone84/use-case-nginx-iam/blob/main/screenshots/limits.png?raw=true)
 
 ```
 3. Write a simple build and deployment pipeline for the above using groovy /
@@ -26,7 +26,7 @@ Jenkinsfile, CircleCI or GitHub Actions. [15 pts]
 A GH action (self hosted) build the image and push it over jfrog artifactory.
 The last step run the kubernetes deployment pulling the new image building a local nginx environment 
 ``` 
-![alt text](https://github.com/simone84/cision-test/blob/main/screenshots/k8sresources.png?raw=true)
+![alt text](https://github.com/simone84/use-case-nginx-iam/blob/main/screenshots/k8sresources.png?raw=true)
 
 ```
 4. Source or come up with a text manipulation problem and solve it with at least two of
@@ -57,8 +57,8 @@ Module calling: ./main.tf
 tfvars: ./prod.tfvars
 module: ./modules/role
 ```
-![alt text](https://github.com/simone84/cision-test/blob/main/screenshots/tfstatelist.png?raw=true)
-![alt text](https://github.com/simone84/cision-test/blob/main/screenshots/testassumerole.png?raw=true)
+![alt text](https://github.com/simone84/use-case-nginx-iam/blob/main/screenshots/tfstatelist.png?raw=true)
+![alt text](https://github.com/simone84/use-case-nginx-iam/blob/main/screenshots/testassumerole.png?raw=true)
 
 ## Requirements ##
 Nginx exercise:
